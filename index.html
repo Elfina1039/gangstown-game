@@ -1,0 +1,118 @@
+<html>
+
+    <head>
+        <title>Gangstown</title>
+        <link rel=stylesheet  href='node_modules/angular-material/angular-material.min.css'>
+        
+      <script src='node_modules/socket.io-client/dist/socket.io.js'></script>
+         <script src='node_modules/angular/angular.min.js'></script>
+        <script  src='node_modules/angular-animate/angular-animate.min.js'></script>
+         <script  src='node_modules/angular-aria/angular-aria.min.js'></script>
+        <script src = "node_modules/angular-messages/angular-messages.min.js"></script>
+        <script src='node_modules/angular-material/angular-material.min.js'></script>
+      
+        
+        
+          <link rel = "stylesheet" href = "node_modules/material-icons/iconfont/material-icons.css">
+        
+        <style>
+            .notOwned{background-color:chocolate}
+            .owned{background-color:forestgreen}
+            w
+            .team{background-color:darkslateblue}
+            
+            li{list-style-type:none}
+            
+        
+        </style>
+        
+        
+       <script> 
+
+           angular.module('gangsTown', ['ngMaterial'])
+           .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+    .dark()
+    .warnPalette('lime');
+           });
+
+        </script>
+        
+        <script src='services/ioFactory.js'></script>  
+        
+    </head>
+    
+    <body ng-app='gangsTown' ng-controller=masterScreen>
+       
+      <md-toolbar layout=row>
+          
+          <h3>Gangstown - {{yourTeam}}
+        
+        </h3>
+            
+        <h3>   <md-icon >attach_money</md-icon> {{teams[yourTeam].cash}}
+          
+            <md-icon class='md-accent'>flag</md-icon> {{teams[yourTeam].respect}} </h3>
+        
+          
+        </md-toolbar>  
+      <md-content layout=row row-wrap>  
+       <div layout=column style='width:90%'>   
+        <div layout=row row-wrap>
+          <md-card ng-repeat='p in places' style='width:20%'>
+           <md-card-header ng-class='p.owner==yourTeam ? "owned":"notOwned"'>
+          {{p.name}}   <md-icon>{{p.icon}}</md-icon> {{p.owner}}
+           </md-card-header>
+           <md-card-title layout=column>
+               <ul ng-repeat='r in p.resources'>
+                   <li><md-icon> {{icons[r.type]}}</md-icon> {{r.amount}}
+               </ul>
+        </md-card-title>
+            <md-card-content>
+              
+                <ul ng-repeat='l in p.log'>
+             <li>{{l.team}} , {{l.time}} 
+               </ul>
+              </md-card-content>
+        </md-card>
+             
+        </div>
+          
+            <div layout=row row-wrap>
+          <md-card ng-repeat='t in teams' style='width:30%' ng-if='t.name!=yourTeam'>
+           <md-card-header class=team>
+          {{t.name}}  
+           </md-card-header>
+           <md-card-title>
+               <ul>
+                   <li><md-icon class='md-warn'>attach_money</md-icon> {{t.cash}}
+                    <li><md-icon class='md-accent'>flag</md-icon> {{t.respect}}
+               </ul>
+        </md-card-title>
+            <md-card-content>
+           <md-icon aria-label='enemy upgrade' class=md-accent  ng-repeat='u in upgrades' ng-show='t.upgrades[u.name]==true'>{{u.icon}}</md-icon>
+              </md-card-content>
+        </md-card>
+             
+        </div>
+          
+          
+          </div>
+
+          <div layout=column style='width:10%'>
+              <span  ng-repeat='u in upgrades'>
+              <md-button class='md-button'ng-show='teams[yourTeam].upgrades[u.name]!=true' ng-class='u.cost<=teams[yourTeam].cash ? "md-warn":"disabled"'>
+                  <md-icon>{{u.icon}}</md-icon>{{u.cost}}
+              
+              </md-button>
+                   <md-icon class=md-accent ng-show='teams[yourTeam].upgrades[u.name]==true'>{{u.icon}}</md-icon>
+              </span>
+              
+          </div>
+          
+           
+           </md-content> 
+        
+    </body>
+    
+</html>
