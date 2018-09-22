@@ -4,8 +4,8 @@ var express=require('express');
 const cookieParser = require('cookie-parser');
 var socket = require('socket.io');
 var app=express();
-var server=app.listen(3000, function(){
-    console.log('server listening on port 3000');
+var server=app.listen(4042,"elfin",function(){
+    console.log('server listening on port 4042');
 });
 
 
