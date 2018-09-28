@@ -4,8 +4,8 @@ var express=require('express');
 const cookieParser = require('cookie-parser');
 var socket = require('socket.io');
 var app=express();
-var server=app.listen(4042,"elfin",function(){
-    console.log('server listening on port 4042');
+var server=app.listen(4042,"0.0.0.0",function(){
+    console.log('server listening on port 4000');
 });
 
 
@@ -19,17 +19,17 @@ var game={};
 game.places={
     bar:{name:'Bar', icon:'local_bar', resources:[{type:'flatCash', amount:200}], owner:'Mafia',
         log:[{team:'Mafia', time:'20 m. ago'}, {team:'Svinuchy', time:'10 m. ago'} ]},
-    casino:{name:'Casino', icon:'casino',resources:[{type:'flowingCash', amount:5}, {type:'respect', amount:5}], owner:'Nemo',gains:{},
-           log:[{team:'Mafia', time:'20 m. ago'}, {team:'Svinuchy', time:'10 m. ago'} ]},
+    casino:{name:'Casino', icon:'casino',resources:[{type:'flowingCash', amount:5}, {type:'respect', amount:5}], owner:'Riot',gains:{},
+           log:[{team:'Riot', time:'20 m. ago'}, {team:'TheGang', time:'10 m. ago'} ]},
               
      pubWc:{name:'Public WC', icon:'wc',resources:[{type:'flowingCash', amount:1}, {type:'respect', amount:-5}], owner:'Mafia',
-          log:[{team:'Mafia', time:'20 m. ago'}, {team:'Svinuchy', time:'10 m. ago'} ]}
+          log:[{team:'Mafia', time:'20 m. ago'}, {team:'Riot', time:'10 m. ago'} ]}
 };  
 
 
 game.teams={
-    Delfini:{name:'Delfini', cash:200, respect:10, members:[], upgrades:{Radar:true, Spying:true}},
-    Svinuchy:{name:'Svinuchy', cash:100, respect:20, members:[], upgrades:{Dog:true}},
+    Delfini:{name:'Riot', cash:200, respect:10, members:[], upgrades:{Radar:true, Spying:true}},
+    Svinuchy:{name:'TheGang', cash:100, respect:20, members:[], upgrades:{Dog:true}},
          Mafia:{name:'Mafia', cash:100, respect:20, members:[], upgrades:{Dog:true}}
    
 };

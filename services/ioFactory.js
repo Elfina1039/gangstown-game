@@ -1,5 +1,5 @@
  
-var socket=io.connect('http://192.168.1.11:4042');
+var socket=io.connect('http://localhost:4042');
 
 angular.module('gangsTown')
            .factory('ioFactory',function(){
@@ -16,8 +16,8 @@ angular.module('gangsTown')
     $scope.places={};
                
      $scope.teams={
-    Delfini:{name:'Delfini', cash:200, respect:10, members:[], upgrades:{Radar:true, Spying:true}},
-    Svinuchy:{name:'Svinuchy', cash:100, respect:20, members:[], upgrades:{Dog:true}},
+    Delfini:{name:'Riot', cash:200, respect:10, members:[], upgrades:{Radar:true, Spying:true}},
+    Svinuchy:{name:'TheGang', cash:100, respect:20, members:[], upgrades:{Dog:true}},
          Mafia:{name:'Mafia', cash:100, respect:20, members:[], upgrades:{Dog:true}}
    
 };
